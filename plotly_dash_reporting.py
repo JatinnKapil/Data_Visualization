@@ -6,7 +6,7 @@ import pandas as pd
 
 # Read in the data from Excel
 df = pd.read_excel(
-    "/blob/master/data/salesfunnel.xlsx?raw=True"
+    "/blob/master/data/funnel.xlsx"
 )
 
 # Get a list of all the avilable managers
@@ -17,7 +17,7 @@ app = dash.Dash()
 
 # Populate the layout with HTML and graph components
 app.layout = html.Div([
-    html.H2("Sales Funnel Report"),
+    html.H2("Funnel Report"),
     html.Div(
         [
             dcc.Dropdown(
