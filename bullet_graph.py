@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+from sqlalchemy import create_engine
 
 def bulletgraph(data=None, limits=None, labels=None, axis_label=None, title=None,
                 size=(5, 3), palette=None, target_color="gray", bar_color="black",
@@ -91,6 +91,15 @@ def bulletgraph(data=None, limits=None, labels=None, axis_label=None, title=None
 
 if __name__ == "__main__":
 
+  #Reading From a Database
+  
+  # Connect to sqlite db
+db_file = os.path.join(os.path.dirname(wb.fullname), 'proj.db')
+engine = create_engine(r"sqlite:///{}".format(db_file))
+  data = pd.read_sql(sql, engine)
+  # Read query directly into a dataframe
+  # Create SQL query
+sql = 'SELECT * from table WHERE x="{}" AND date BETWEEN "{}" AND "{}"'.format()
     data_to_plot = []
 
     my_fig = bulletgraph(
