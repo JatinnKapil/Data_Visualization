@@ -1,0 +1,53 @@
+import pandas as pd
+import plotly.express as px
+
+# data to plot
+df = pd.read_csv('')
+
+pd.options.plotting.backend = "plotly"
+
+fig.write_image('potassium_sodium_plots.png')
+
+fig = df[['sodium', 'potass']].plot(kind='hist',
+                                    nbins=50,
+                                    opacity=0.75,
+                                    marginal='box',
+                                    title='Potassium and Sodium Distributions')
+fig.update_layout(
+    title_text='Sodium and Potassium Distribution',  # title of plot
+    xaxis_title_text='Grams',
+    yaxis_title_text='Count',
+    bargap=0.1,  # gap between bars of adjacent location coordinates
+    template='simple_white', # choose from one of the pre-defined templates
+)
+
+# update_layout multiple times
+fig.update_layout(legend=dict(yanchor="top", y=.74, xanchor="right", x=.99))
+
+# add a vertical "target" line
+fig.add_shape(
+    type='line',
+    line_color='gold',
+    line_width=3,
+    opacity=1,
+    line_dash='dot',
+    x0=100,
+    x1=100,
+    xref='x',
+    y0=0,
+    y1=15,
+    yref='y')
+
+# add a text callout with arrow
+fig.add_annotation(
+    text='USDA Target',
+    xanchor='right',
+    x=100,
+    y=12,
+    arrowhead=1,
+    showarrow=True)
+
+fig.write_html('sodium_potassion_custom.html',
+               include_plotlyjs='cdn',
+               full_html=False,
+               include_mathjax='cdn')
