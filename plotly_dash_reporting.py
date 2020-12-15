@@ -3,7 +3,17 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 import pandas as pd
+from sqlalchemy import create_engine
 
+#Reading From a Database
+# Connect to sqlite db
+db_file = os.path.join(os.path.dirname(wb.fullname), 'proj.db')
+engine = create_engine(r"sqlite:///{}".format(db_file))
+  data = pd.read_sql(sql, engine)
+  # Read query directly into a dataframe
+  # Create SQL query
+sql = 'SELECT * from table WHERE x="{}" AND date BETWEEN "{}" AND "{}"'.format()
+  
 # Read in the data from Excel
 df = pd.read_excel(
     "/blob/master/data/funnel.xlsx"
